@@ -44,13 +44,30 @@ jobs:
       - name: Build Angular app
         run: |
           cd frontend
-          npm run build -- --configuration=production
+          # Afficher la version d'Angular CLI
+          npx ng version
+          # Build avec chemin de sortie explicite et configuration de production
+          npm run build -- --configuration=production --output-path=dist/browser
           
       # Copier le build Angular dans les ressources statiques du backend
       - name: Copy Angular build to backend static resources
         run: |
           mkdir -p backend/src/main/resources/static
-          cp -r frontend/dist/* backend/src/main/resources/static/
+          # Vérifier la structure des dossiers de build
+          ls -la frontend/dist/
+          # Si le build est dans frontend/dist/frontend/browser (Angular 17)
+          if [ -d "frontend/dist/browser" ]; then
+            cp -r frontend/dist/browser/* backend/src/main/resources/static/
+          # Si le build est dans frontend/dist/frontend
+          elif [ -d "frontend/dist/frontend" ]; then
+            cp -r frontend/dist/frontend/* backend/src/main/resources/static/
+          # Sinon, essayer le chemin standard
+          else
+            cp -r frontend/dist/* backend/src/main/resources/static/ || echo "Couldn't find Angular build files"
+          fi
+          # Vérifier le contenu du dossier static
+          echo "Contenu du dossier static après copie:"
+          ls -la backend/src/main/resources/static/ || echo "Le dossier static est vide ou n'existe pas"
       
       # Build Backend
       - name: Grant execute permission for gradlew
