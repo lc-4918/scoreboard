@@ -3,7 +3,7 @@
 ![Score Board](https://img.shields.io/badge/Score%20Board-Gestion%20de%20Tournois-blue)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9-orange)
 ![Ktor](https://img.shields.io/badge/Ktor-2.3-purple)
-![Angular](https://img.shields.io/badge/Angular-17-red)
+![Angular](https://img.shields.io/badge/Angular-19-red)
 ![Portfolio](https://img.shields.io/badge/Projet-Portfolio-green)
 ![Deploy](https://img.shields.io/badge/Deploy-Render-blueviolet)
 
@@ -65,7 +65,7 @@ Le backend suit une architecture hexagonale (ports et adaptateurs) :
 
 ### Frontend (Angular)
 
-- **Framework** : Angular 17
+- **Framework** : Angular 19
 - **UI Components** : Angular Material
 - **State Management** : Services Angular avec RxJS
 - **Responsive Design** pour mobile et desktop
@@ -130,7 +130,9 @@ L'application est déployée automatiquement sur [Render](https://render.com) vi
 
 ### Démonstration
 
-**URL** : [https://scoreboard.onrender.com](https://scoreboard.onrender.com)
+**URL** : [https://scoreboard-v4cu.onrender.com](https://scoreboard-v4cu.onrender.com)
+
+> **Note** : Lors du premier accès, veuillez patienter 30-45 secondes si l'application était en veille. C'est une caractéristique du plan gratuit de Render qui met les applications en veille après 15 minutes d'inactivité.
 
 Le workflow CI/CD :
 1. Construit l'application Angular
@@ -143,14 +145,15 @@ Le workflow CI/CD :
 Le déploiement utilise:
 - Un service Web Docker sur le plan gratuit
 - Le Dockerfile à la racine du projet
-- Une base de données MongoDB configurée sur Render
+- La connexion à MongoDB Cloud est déjà configurée dans le fichier `application.conf`
 
-### Avantages de Render
+### Avantages et particularités de Render
 
 - Déploiement gratuit pour les projets personnels
 - Intégration facile avec GitHub
 - Containers Docker pour une exécution cohérente
-- Démarrage automatique lors des requêtes (économie de ressources)
+- **Mise en veille automatique** : Sur le plan gratuit, l'application se met en veille après 15 minutes d'inactivité
+- **Délai au premier accès** : Lors du premier accès après une période d'inactivité, l'application peut mettre 30-45 secondes à démarrer
 
 ### Déploiement sur Render
 
@@ -169,14 +172,9 @@ Pour déployer cette application sur Render :
    - Plan : Free
    - Configuration automatique grâce au fichier `render.yaml`
 
-4. **Configurez la base de données**
-   - Sur le dashboard Render, cliquez sur "New" puis "PostgreSQL"
-   - Créez une base de données (plan gratuit)
-   - Copiez l'URL de connexion
-
-5. **Définissez les variables d'environnement**
-   - Dans les paramètres de votre service Web
-   - Ajoutez `MONGO_URI` avec la valeur de connexion à votre base de données
+4. **Variables d'environnement**
+   - Aucune configuration supplémentaire n'est requise car la connexion MongoDB est déjà paramétrée dans `application.conf`
+   - Pour une approche plus sécurisée en production, vous pourriez toutefois externaliser ces informations dans les variables d'environnement
 
 Le déploiement démarre automatiquement après la création du service Web.
 
@@ -185,7 +183,7 @@ Le déploiement démarre automatiquement après la création du service Web.
 La documentation de l'API est disponible via Swagger UI.
 
 - **En local** : [http://localhost:9090/swagger-ui](http://localhost:9090/swagger-ui)
-- **En production** : [https://scoreboard.onrender.com/swagger-ui](https://scoreboard.onrender.com/swagger-ui)
+- **En production** : [https://scoreboard-v4cu.onrender.com/swagger-ui](https://scoreboard-v4cu.onrender.com/swagger-ui)
 
 ## 🎮 Fonctionnalités
 
