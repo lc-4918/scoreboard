@@ -140,43 +140,13 @@ Le workflow CI/CD :
 3. Prépare les fichiers nécessaires pour Render (Dockerfile et render.yaml)
 4. Crée un package de déploiement
 
-### Configuration Render
+### Configuration et particularités
 
-Le déploiement utilise:
-- Un service Web Docker sur le plan gratuit
-- Le Dockerfile à la racine du projet
-- La connexion à MongoDB Cloud est déjà configurée dans le fichier `application.conf`
-
-### Avantages et particularités de Render
-
-- Déploiement gratuit pour les projets personnels
-- Intégration facile avec GitHub
+- Déploiement Docker sur le plan gratuit de Render
+- Connexion à MongoDB Cloud configurée dans `application.conf`
 - Containers Docker pour une exécution cohérente
-- **Mise en veille automatique** : Sur le plan gratuit, l'application se met en veille après 15 minutes d'inactivité
-- **Délai au premier accès** : Lors du premier accès après une période d'inactivité, l'application peut mettre 30-45 secondes à démarrer
-
-### Déploiement sur Render
-
-Pour déployer cette application sur Render :
-
-1. **Créez un compte sur [Render](https://render.com)**
-
-2. **Connectez votre dépôt GitHub**
-   - Sur le dashboard Render, cliquez sur "New" puis "Web Service"
-   - Choisissez GitHub comme source
-   - Sélectionnez votre dépôt
-
-3. **Configurez le service**
-   - Nom : `scoreboard` (ou un nom de votre choix)
-   - Type d'environnement : Docker
-   - Plan : Free
-   - Configuration automatique grâce au fichier `render.yaml`
-
-4. **Variables d'environnement**
-   - Aucune configuration supplémentaire n'est requise car la connexion MongoDB est déjà paramétrée dans `application.conf`
-   - Pour une approche plus sécurisée en production, vous pourriez toutefois externaliser ces informations dans les variables d'environnement
-
-Le déploiement démarre automatiquement après la création du service Web.
+- Mise en veille après 15 minutes d'inactivité (plan gratuit)
+- Délai de démarrage de 30-45 secondes au premier accès
 
 ## 📚 API Documentation
 
@@ -203,7 +173,13 @@ La documentation de l'API est disponible via Swagger UI.
 
 ## 📸 Captures d'écran
 
-*À ajouter ultérieurement*
+Voici quelques captures d'écran de l'application :
+
+### Liste des joueurs
+![Liste des joueurs](frontend/public/img/screenshots/players.png)
+
+### Simulation de match
+![Simulation de match](frontend/public/img/screenshots/match.png)
 
 ## 📄 Licence
 
