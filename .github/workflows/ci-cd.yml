@@ -11,7 +11,7 @@ permissions:
   deployments: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -82,14 +82,53 @@ jobs:
         run: |
           cd backend
           ./gradlew test
-      
-      # Deploy to Heroku
-      - name: Deploy to Heroku
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-        uses: AkhileshNS/heroku-deploy@v3.12.14
+          
+      # Créer les fichiers pour le déploiement sur Render
+      - name: Prepare for Render deployment
+        run: |
+          # Créer le répertoire pour le déploiement
+          mkdir -p deploy
+          
+          # Copier le fichier JAR
+          cp backend/build/libs/*.jar deploy/app.jar
+          
+          # Créer le Dockerfile
+          cat > deploy/Dockerfile << 'EOF'
+          FROM openjdk:17-jdk-slim
+          
+          WORKDIR /app
+          
+          COPY app.jar app.jar
+          
+          # Variables d'environnement Render
+          ENV PORT=8080
+          
+          # Exposer le port
+          EXPOSE 8080
+          
+          # Commande pour démarrer l'application
+          CMD ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
+          EOF
+          
+          # Créer un fichier render.yaml pour la configuration
+          cat > render.yaml << 'EOF'
+          services:
+            - type: web
+              name: scoreboard
+              env: docker
+              dockerfilePath: ./deploy/Dockerfile
+              plan: free
+              healthCheckPath: /
+              envVars:
+                - key: MONGO_URI
+                  sync: false
+          EOF
+          
+      # Upload les artifacts pour déploiement manuel
+      - name: Archive deployment package
+        uses: actions/upload-artifact@v3
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          appdir: "backend"
-          usedocker: false 
+          name: deploy-package
+          path: |
+            deploy/
+            render.yaml 

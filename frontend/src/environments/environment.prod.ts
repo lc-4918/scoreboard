@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api' // Chemin relatif puisque l'API est sur le même domaine
+  apiUrl: '/api' // L'API sera sur le même domaine grâce à Render
 }; 

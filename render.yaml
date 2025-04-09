@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: scoreboard
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    buildCommand: ./gradlew build -x test && cd frontend && npm ci && npm run build -- --configuration=production && cd .. && mkdir -p backend/src/main/resources/static && cp -r frontend/dist/* backend/src/main/resources/static/
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false 

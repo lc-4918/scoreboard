@@ -5,6 +5,7 @@
 ![Ktor](https://img.shields.io/badge/Ktor-2.3-purple)
 ![Angular](https://img.shields.io/badge/Angular-17-red)
 ![Portfolio](https://img.shields.io/badge/Projet-Portfolio-green)
+![Deploy](https://img.shields.io/badge/Deploy-Render-blueviolet)
 
 ## 🧩 À propos
 
@@ -125,23 +126,66 @@ Ce script :
 
 ## 🌐 Déploiement
 
-L'application est déployée automatiquement sur Heroku via GitHub Actions.
+L'application est déployée automatiquement sur [Render](https://render.com) via GitHub Actions.
 
 ### Démonstration
 
-**URL** : [https://scoreboard-demo-24a9975aeb5f.herokuapp.com/](https://scoreboard-demo-24a9975aeb5f.herokuapp.com/)
+**URL** : [https://scoreboard.onrender.com](https://scoreboard.onrender.com)
 
 Le workflow CI/CD :
 1. Construit l'application Angular
 2. Intègre les fichiers compilés dans les ressources du backend
-3. Déploie l'ensemble sur Heroku
+3. Prépare les fichiers nécessaires pour Render (Dockerfile et render.yaml)
+4. Crée un package de déploiement
+
+### Configuration Render
+
+Le déploiement utilise:
+- Un service Web Docker sur le plan gratuit
+- Le Dockerfile à la racine du projet
+- Une base de données MongoDB configurée sur Render
+
+### Avantages de Render
+
+- Déploiement gratuit pour les projets personnels
+- Intégration facile avec GitHub
+- Containers Docker pour une exécution cohérente
+- Démarrage automatique lors des requêtes (économie de ressources)
+
+### Déploiement sur Render
+
+Pour déployer cette application sur Render :
+
+1. **Créez un compte sur [Render](https://render.com)**
+
+2. **Connectez votre dépôt GitHub**
+   - Sur le dashboard Render, cliquez sur "New" puis "Web Service"
+   - Choisissez GitHub comme source
+   - Sélectionnez votre dépôt
+
+3. **Configurez le service**
+   - Nom : `scoreboard` (ou un nom de votre choix)
+   - Type d'environnement : Docker
+   - Plan : Free
+   - Configuration automatique grâce au fichier `render.yaml`
+
+4. **Configurez la base de données**
+   - Sur le dashboard Render, cliquez sur "New" puis "PostgreSQL"
+   - Créez une base de données (plan gratuit)
+   - Copiez l'URL de connexion
+
+5. **Définissez les variables d'environnement**
+   - Dans les paramètres de votre service Web
+   - Ajoutez `MONGO_URI` avec la valeur de connexion à votre base de données
+
+Le déploiement démarre automatiquement après la création du service Web.
 
 ## 📚 API Documentation
 
 La documentation de l'API est disponible via Swagger UI.
 
 - **En local** : [http://localhost:9090/swagger-ui](http://localhost:9090/swagger-ui)
-- **En production** : [https://scoreboard-demo.herokuapp.com/swagger-ui](https://scoreboard-demo.herokuapp.com/swagger-ui)
+- **En production** : [https://scoreboard.onrender.com/swagger-ui](https://scoreboard.onrender.com/swagger-ui)
 
 ## 🎮 Fonctionnalités
 
