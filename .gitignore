@@ -1,0 +1,48 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Backend ###
+backend/.gradle
+!backend/gradle/wrapper/gradle-wrapper.jar
+!backend/gradle/wrapper/gradle-wrapper.properties
+backend/build
+backend/logs
+backend/target
+backend/src/main/resources/static
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+frontend/.vscode/
+frontend/.editorconfig
+
+### Angular ###
+frontend/node_modules/
+frontend/logs
+
+### Angular CLI ###
+frontend/.angular/
+frontend/dist/
+frontend/coverage/
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings/
+
+### System Files ###
+.DS_Store
+Thumbs.db

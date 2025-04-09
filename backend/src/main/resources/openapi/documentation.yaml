@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: ScoreBoard API
+  version: 1.0.0
+  description: Ce fichier de documentation Swagger décrit les spécifications de l'API
+
+paths:
+  /player:
+    post:
+      summary: Créer un nouveau joueur
+      tags:
+        - Joueurs
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerRequest'
+      responses:
+        '201':
+          description: Joueur créé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: string
+        '400':
+          description: Mauvaise requête
+  /player/{id}:
+    get:
+      summary: Récupère le joueur selon son id
+      tags:
+        - Joueurs
+      operationId: getPlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Réponse avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+        '404':
+          description: Joueur non trouvé
+    delete:
+      summary: Supprime un joueur selon son id
+      tags:
+        - Joueurs
+      operationId: deletePlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Joueur supprimé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Mauvaise requête
+        '404':
+          description: Joueur non trouvé
+    patch:
+      summary: Met à jour un joueur selon son id
+      tags:
+        - Joueurs
+      operationId: updatePlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: points
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Nombre de points à attribuer au joueur
+      responses:
+        '200':
+          description: Joueur mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+        '400':
+          description: Mauvaise requête
+        '404':
+          description: Joueur non trouvé
+  /players:
+    get:
+      summary: Récupère tous les joueurs triés par leur nombre de points
+      tags:
+        - Joueurs
+      operationId: getAllPlayersSorted
+      responses:
+        '200':
+          description: Réponse avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerResponse'
+    delete:
+      summary: Supprime tous les joueurs
+      tags:
+        - Joueurs
+      operationId: deleteAllPlayers
+      responses:
+        '200':
+          description: Joueurs supprimés avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  count:
+                    type: integer
+        '400':
+          description: Mauvaise requête
+  /players/match:
+    post:
+      summary: Simule un match entre deux joueurs et attribue un point au gagnant
+      tags:
+        - Matches
+      operationId: simulateMatch
+      parameters:
+        - name: player1Id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID du premier joueur
+        - name: player2Id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID du deuxième joueur
+      responses:
+        '200':
+          description: Match simulé avec succès, retourne le classement mis à jour
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerResponse'
+        '400':
+          description: Mauvaise requête, paramètres manquants ou invalides
+
+components:
+  schemas:
+    PlayerRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Nom d'utilisateur du joueur
+        points:
+          type: integer
+          description: Nombre de points du joueur
+          default: 0
+        avatar:
+          type: string
+          description: URL de l'avatar du joueur
+          nullable: true
+    PlayerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du joueur
+        username:
+          type: string
+          description: Nom d'utilisateur du joueur
+        points:
+          type: integer
+          description: Nombre de points du joueur
+        ranking:
+          type: integer
+          description: Classement du joueur
+        avatar:
+          type: string
+          description: URL de l'avatar du joueur
+          nullable: true
+

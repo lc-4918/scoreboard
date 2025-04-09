@@ -1,0 +1,83 @@
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 24px;
+  color: #3f51b5;
+}
+
+.add-player-card {
+  margin-bottom: 24px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.player-table-container {
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+.player-table {
+  width: 100%;
+}
+
+/* Style pour les animations de survol */
+.mat-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+mat-card-header {
+  padding-bottom: 16px;
+}
+
+/* Espacement des boutons dans card-actions */
+mat-card-actions {
+  padding: 0 16px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styles pour l'aperçu de l'avatar */
+.avatar-preview {
+  margin-top: 16px;
+  
+  h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #666;
+  }
+}
+
+.avatar-image-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #3f51b5;
+  margin: 0 auto;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Style pour la ligne sans données */
+.no-data {
+  text-align: center;
+  padding: 24px;
+  color: #666;
+  font-style: italic;
+}

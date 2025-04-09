@@ -1,0 +1,21 @@
+<div class="app-container">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <span class="logo">Score Board</span>
+    <div class="nav-links">
+      <a mat-button routerLink="/players" routerLinkActive="active">
+        <mat-icon>list</mat-icon> Classement
+      </a>
+      <a mat-button routerLink="/simulator" routerLinkActive="active">
+        <mat-icon>sports</mat-icon> Simulateur
+      </a>
+    </div>
+  </mat-toolbar>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer>
+    <p>&copy; {{ currentYear }} Score Board - Gestion de Tournois</p>
+  </footer>
+</div>
