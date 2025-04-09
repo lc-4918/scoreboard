@@ -1,9 +1,17 @@
-FROM openjdk:17-jdk-slim
-
+FROM node:18 AS frontend-builder
 WORKDIR /app
+COPY frontend/ ./frontend/
+RUN cd frontend && npm ci && npm run build -- --configuration=production --output-path=dist/browser
 
-# Copier le JAR déjà construit
-COPY backend/build/libs/*.jar app.jar
+FROM gradle:7.6-jdk17 AS backend-builder
+WORKDIR /app
+COPY backend/ ./backend/
+COPY --from=frontend-builder /app/frontend/dist/browser/ ./backend/src/main/resources/static/
+RUN cd backend && gradle build -x test
+
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=backend-builder /app/backend/build/libs/*.jar app.jar
 
 # Variables d'environnement (Render substituera automatiquement PORT)
 ENV PORT=8080

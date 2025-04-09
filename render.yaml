@@ -4,7 +4,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
-    buildCommand: chmod +x build.sh && ./build.sh
     healthCheckPath: /
     envVars:
       - key: MONGO_URI
