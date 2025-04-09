@@ -2,6 +2,7 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
+# Copier le JAR déjà construit
 COPY backend/build/libs/*.jar app.jar
 
 # Variables d'environnement (Render substituera automatiquement PORT)
