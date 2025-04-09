@@ -129,7 +129,7 @@ L'application est déployée automatiquement sur Heroku via GitHub Actions.
 
 ### Démonstration
 
-**URL** : [https://scoreboard-demo.herokuapp.com](https://scoreboard-demo.herokuapp.com)
+**URL** : [https://scoreboard-demo-24a9975aeb5f.herokuapp.com/](https://scoreboard-demo-24a9975aeb5f.herokuapp.com/)
 
 Le workflow CI/CD :
 1. Construit l'application Angular
@@ -171,4 +171,4 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 Luc CLEMENT - [lucclement38@gmail.com](mailto:lucclement38@gmail.com)
 
-Projet GitHub : [https://github.com/lc-4918/scoreboard](https://github.com/lc-4918/scoreboard) 
+Projet GitHub : [https://github.com/lc-4918/scoreboard](https://github.com/lc-4918/scoreboard)
