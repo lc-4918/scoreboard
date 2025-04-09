@@ -130,7 +130,7 @@ L'application est déployée automatiquement sur [Render](https://render.com) vi
 
 ### Démonstration
 
-**URL** : [https://scoreboard-v4cu.onrender.com](https://scoreboard-v4cu.onrender.com)
+**URL** : [https://scoreboard-g96j.onrender.com](https://scoreboard-g96j.onrender.com)
 
 > **Note** : Lors du premier accès, veuillez patienter 30-45 secondes si l'application était en veille. C'est une caractéristique du plan gratuit de Render qui met les applications en veille après 15 minutes d'inactivité.
 
@@ -183,7 +183,7 @@ Le déploiement démarre automatiquement après la création du service Web.
 La documentation de l'API est disponible via Swagger UI.
 
 - **En local** : [http://localhost:9090/swagger-ui](http://localhost:9090/swagger-ui)
-- **En production** : [https://scoreboard-v4cu.onrender.com/swagger-ui](https://scoreboard-v4cu.onrender.com/swagger-ui)
+- **En production** : [https://scoreboard-g96j.onrender.com/swagger-ui](https://scoreboard-g96j.onrender.com/swagger-ui)
 
 ## 🎮 Fonctionnalités
 
