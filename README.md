@@ -83,9 +83,6 @@ Une particularité de ce projet est que le frontend Angular est compilé directe
 ### Prérequis
 
 - JDK 17+
-- Node.js 18+
-- npm 9+
-- MongoDB
 
 ### Cloner le projet
 
